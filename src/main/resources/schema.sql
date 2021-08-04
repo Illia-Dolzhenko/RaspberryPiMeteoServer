@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS data_log (
+    id INT AUTO_INCREMENT  PRIMARY KEY,
+    temperature VARCHAR(250) NOT NULL,
+    pressure VARCHAR(250) NOT NULL,
+    humidity VARCHAR(250) NOT NULL,
+    co2 VARCHAR(250) NOT NULL,
+    log_time TIMESTAMP NOT NULL
+);
