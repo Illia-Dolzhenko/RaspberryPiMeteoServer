@@ -4,16 +4,11 @@ import com.dolzhik.meteoServer.entity.DataEntry;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
-import org.hibernate.type.LocalDateType;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 
 @Service
 public class BMProvider implements DataProvider {

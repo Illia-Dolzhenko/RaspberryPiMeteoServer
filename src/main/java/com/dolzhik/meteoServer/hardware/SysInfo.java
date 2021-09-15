@@ -1,5 +1,6 @@
 package com.dolzhik.meteoServer.hardware;
 
+import com.pi4j.system.NetworkInfo;
 import com.pi4j.system.SystemInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,7 @@ public class SysInfo {
     private long memoryTotal = 0;
     private long coreFrequency = 0;
     private long armFrequency = 0;
+    private String ipAddress = "";
     private static final Logger logger = LogManager.getLogger(SysInfo.class);
 
     public SysInfo() {
@@ -26,6 +28,7 @@ public class SysInfo {
             memoryUsed = SystemInfo.getMemoryUsed();
             coreFrequency = SystemInfo.getClockFrequencyCore();
             armFrequency = SystemInfo.getClockFrequencyArm();
+            ipAddress = NetworkInfo.getIPAddress();
         } catch (IOException | InterruptedException e) {
             logger.error("Can't get system info.");
             logger.error(e);
@@ -58,5 +61,9 @@ public class SysInfo {
 
     public long getArmFrequency() {
         return armFrequency;
+    }
+
+    public String getIpAddress(){
+        return ipAddress;
     }
 }
