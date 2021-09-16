@@ -1,7 +1,11 @@
-package com.dolzhik.meteoServer.captcha;
+package com.dolzhik.meteoServer.service;
 
+import com.dolzhik.meteoServer.entity.Captcha;
+import com.dolzhik.meteoServer.repository.CaptchaRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
@@ -12,9 +16,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Random;
 
+@Service
 public class LocalCaptchaGenerator implements CaptchaProvider {
+
+    @Autowired
+    CaptchaRepository captchaRepository;
+
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final Random RANDOM = new Random();
     private static final int CAPTCHA_SIZE = 5;
@@ -54,21 +64,20 @@ public class LocalCaptchaGenerator implements CaptchaProvider {
             return null;
         }
 
-        //todo
-        //remove after tested
-//        File file = new File("myimage.png");
-//        try {
-//            ImageIO.write(image, "png", file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        //
+        captchaRepository.save(capthca);
+        LOGGER.info("Captcha created: {}", capthca);
 
         return capthca;
     }
 
     @Override
     public boolean validateCaptcha(long id, String answer) {
+        var captcha = Optional.ofNullable(captchaRepository.getCaptchaById(id)).orElse(new Captcha());
+        answer = answer.toLowerCase();
+        if (answer.equals(captcha.getAnswer())) {
+            captchaRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 

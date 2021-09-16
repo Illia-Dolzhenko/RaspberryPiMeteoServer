@@ -1,4 +1,4 @@
-package com.dolzhik.meteoServer.provider;
+package com.dolzhik.meteoServer.service;
 
 import com.dolzhik.meteoServer.entity.DataEntry;
 import com.pi4j.io.i2c.I2CBus;

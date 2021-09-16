@@ -1,4 +1,4 @@
-package com.dolzhik.meteoServer.provider;
+package com.dolzhik.meteoServer.service;
 
 import com.dolzhik.meteoServer.entity.DataEntry;
 

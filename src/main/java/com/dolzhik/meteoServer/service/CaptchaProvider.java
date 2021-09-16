@@ -1,8 +1,7 @@
-package com.dolzhik.meteoServer.captcha;
+package com.dolzhik.meteoServer.service;
 
-import org.springframework.stereotype.Service;
+import com.dolzhik.meteoServer.entity.Captcha;
 
-@Service
 public interface CaptchaProvider {
 
     Captcha getCaptcha();

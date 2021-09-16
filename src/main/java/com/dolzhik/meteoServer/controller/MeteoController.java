@@ -2,16 +2,13 @@ package com.dolzhik.meteoServer.controller;
 
 import com.dolzhik.meteoServer.entity.DataEntry;
 import com.dolzhik.meteoServer.entity.DayEntry;
-import com.dolzhik.meteoServer.hardware.DHT11;
 import com.dolzhik.meteoServer.repository.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -60,7 +57,6 @@ public class MeteoController {
 
             averagePerHour.add(average);
         }
-
 
         Map<String, Object> test = new HashMap<>();
         averagePerHour.sort(Comparator.comparing(DayEntry::getFrom));
