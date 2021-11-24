@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CaptchaController {
 
+    private final CaptchaProvider captchaProvider;
+
     @Autowired
-    CaptchaProvider captchaProvider;
+    public CaptchaController(CaptchaProvider captchaProvider) {
+        this.captchaProvider = captchaProvider;
+    }
 
     @GetMapping("/captcha")
     public Object getCaptcha() {

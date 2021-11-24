@@ -1,7 +1,14 @@
 package com.dolzhik.meteoServer.entity;
 
-public class MessageUI extends Message{
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+import java.time.Instant;
+
+public class MessageUI extends Message {
+    @NotBlank(message = "Captcha cannot be empty")
     private String captcha;
+    @NotNull(message = "Captcha id cannot be empty")
     private Long captchaId;
 
     public String getCaptcha() {
@@ -19,4 +26,13 @@ public class MessageUI extends Message{
     public void setCaptchaId(Long captchaId) {
         this.captchaId = captchaId;
     }
+
+    public Message getMessage() {
+        var message = new Message();
+        message.setText(this.getText());
+        message.setUserName(this.getUserName());
+        message.setCreated(new Timestamp(Instant.now().toEpochMilli()));
+        return message;
+    }
+
 }

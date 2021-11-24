@@ -16,8 +16,12 @@ import java.util.stream.Collectors;
 @RestController
 public class MeteoController {
 
+    private final DataRepository dataRepository;
+
     @Autowired
-    DataRepository dataRepository;
+    public MeteoController(DataRepository dataRepository) {
+        this.dataRepository = dataRepository;
+    }
 
     @GetMapping("/data")
     public Object getMeteoData() {

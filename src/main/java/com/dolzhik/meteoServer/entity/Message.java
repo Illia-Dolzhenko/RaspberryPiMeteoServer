@@ -3,6 +3,7 @@ package com.dolzhik.meteoServer.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
 @Entity
@@ -12,7 +13,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "user_name")
+    @NotBlank(message = "Username cannot be empty")
     private String userName;
+    @NotBlank(message = "Text cannot be empty")
     private String text;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Europe/Kiev")
     private Timestamp created;

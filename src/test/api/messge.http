@@ -1,0 +1,17 @@
+GET http://localhost:8080/getMessages
+Accept: application/json
+
+###
+POST http://localhost:8080/sendMessage
+Content-Type: application/json
+
+{
+  "userName": "dodik",
+  "text": "test message",
+  "captchaId": 193,
+  "captcha": "szbcn"
+}
+
+###
+
+
