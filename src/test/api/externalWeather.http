@@ -1,0 +1,4 @@
+GET https://api.openweathermap.org/data/2.5/weather?q=Kharkiv&appid=c3db565acb6be56f4ec4dd2c406dd757
+Accept: application/json
+
+###

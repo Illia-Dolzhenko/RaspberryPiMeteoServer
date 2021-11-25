@@ -4,6 +4,8 @@ import com.dolzhik.meteoServer.entity.DataEntry;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,15 +14,18 @@ import java.time.Instant;
 
 @Service
 public class BMProvider implements DataProvider {
-    private I2CBus bus;
     // Get I2C device, BME280 I2C address is 0x76(108)
     private I2CDevice device;
 
+    private static final Logger LOG = LogManager.getLogger(BMProvider.class);
+
     public BMProvider() {
+        I2CBus bus;
         try {
             bus = I2CFactory.getInstance(I2CBus.BUS_1);
             device = bus.getDevice(0x76);
         } catch (I2CFactory.UnsupportedBusNumberException | IOException e) {
+            LOG.error("Can't connect to BM sensor.");
             e.printStackTrace();
             bus = null;
             device = null;

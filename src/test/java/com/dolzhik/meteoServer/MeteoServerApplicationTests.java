@@ -9,9 +9,6 @@ class MeteoServerApplicationTests {
 
     @Test
     void contextLoads() {
-        var captchaGenerator = new LocalCaptchaGenerator();
-
-        captchaGenerator.getCaptcha();
     }
 
 }

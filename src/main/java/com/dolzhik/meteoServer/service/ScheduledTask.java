@@ -11,12 +11,16 @@ import java.io.IOException;
 @Service
 public class ScheduledTask {
 
+    private final DataRepository dataRepository;
+    private final DataProvider dataProvider;
+    private final CaptchaRepository captchaRepository;
+
     @Autowired
-    DataRepository dataRepository;
-    @Autowired
-    DataProvider dataProvider;
-    @Autowired
-    CaptchaRepository captchaRepository;
+    public ScheduledTask(DataRepository dataRepository, DataProvider dataProvider, CaptchaRepository captchaRepository) {
+        this.captchaRepository = captchaRepository;
+        this.dataProvider = dataProvider;
+        this.dataRepository = dataRepository;
+    }
 
     @Scheduled(fixedDelay = 60000)
     public void updateData() {
@@ -28,7 +32,7 @@ public class ScheduledTask {
     }
 
     @Scheduled(fixedDelay = 350000)
-    public void removeOldCaptchas(){
+    public void removeOldCaptchas() {
         captchaRepository.removeOldCaptchas();
     }
 }

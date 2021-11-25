@@ -22,8 +22,7 @@ import java.util.Random;
 @Service
 public class LocalCaptchaGenerator implements CaptchaProvider {
 
-    @Autowired
-    CaptchaRepository captchaRepository;
+    private final CaptchaRepository captchaRepository;
 
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final Random RANDOM = new Random();
@@ -32,6 +31,10 @@ public class LocalCaptchaGenerator implements CaptchaProvider {
     private static final int CAPTCHA_WIDTH = 400;
     private static final Logger LOGGER = LogManager.getLogger(LocalCaptchaGenerator.class);
 
+    @Autowired
+    public LocalCaptchaGenerator(CaptchaRepository captchaRepository){
+        this.captchaRepository = captchaRepository;
+    }
 
     @Override
     public Captcha getCaptcha() {
